@@ -18,6 +18,8 @@ public class RankingHandler
         _config = config;
     }
 
+
+
     public HookResult OnPlayerConnectFullHandler(EventPlayerConnectFull @event, GameEventInfo info)
     {
         if (@event.Userid == null)

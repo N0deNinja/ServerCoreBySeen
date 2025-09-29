@@ -18,7 +18,7 @@ public class ServerCorePlugin : BasePlugin, IPluginConfig<Configs.MasterConfig>
 
     public override void Load(bool hotReload)
     {
-        _rankingDatabase = new RankingDatabase();
+        _rankingDatabase = new RankingDatabase(Config);
         _rankingDatabase.Initialize(ModuleDirectory);
 
         _rankingHandler = new RankingHandler(_rankingDatabase, Config);

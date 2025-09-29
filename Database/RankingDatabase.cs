@@ -4,12 +4,20 @@ using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using Dapper;
 using Microsoft.Data.Sqlite;
+using ServerCoreBySeen.Configs;
+using ServerCoreBySeen.Helpers;
 
 namespace ServerCoreBySeen.Database
 {
     public class RankingDatabase
     {
         private SqliteConnection? _connection;
+        private readonly MasterConfig _config = null!;
+
+        public RankingDatabase(MasterConfig config)
+        {
+            _config = config;
+        }
 
         public void Initialize(string directory)
         {
@@ -63,11 +71,19 @@ namespace ServerCoreBySeen.Database
                 return;
             }
 
+            var extraExp = _config.Vip.ExtraExp;
+
             if (deltaScore < 0)
             {
+                extraExp = 0;
                 var player = GetPlayer(steamId);
                 if (player.Score + deltaScore < 0)
                     return;
+            }
+
+            if (GameHelper.IsPlayerVip(steamId, _config))
+            {
+                deltaScore += extraExp;
             }
 
             _connection!.Execute(@"
