@@ -23,12 +23,14 @@ public class ServerCorePlugin : BasePlugin, IPluginConfig<Configs.MasterConfig>
 
         _rankingHandler = new RankingHandler(_rankingDatabase, Config);
 
-        RegisterEventHandler<EventPlayerConnectFull>(_rankingHandler.OnPlayerConnectFullHandler);
-        RegisterEventHandler<EventPlayerDeath>(_rankingHandler.OnPlayerDeathHandler);
-        RegisterEventHandler<EventBombDefused>(_rankingHandler.OnBombDefusedHandler);
-        RegisterEventHandler<EventRoundEnd>(_rankingHandler.OnRoundEndHandler);
-        RegisterEventHandler<EventBombPlanted>(_rankingHandler.OnBombPlantedHandler);
-
+        if (Config.General.EnableRanking)
+        {
+            RegisterEventHandler<EventPlayerConnectFull>(_rankingHandler.OnPlayerConnectFullHandler);
+            RegisterEventHandler<EventPlayerDeath>(_rankingHandler.OnPlayerDeathHandler);
+            RegisterEventHandler<EventBombDefused>(_rankingHandler.OnBombDefusedHandler);
+            RegisterEventHandler<EventRoundEnd>(_rankingHandler.OnRoundEndHandler);
+            RegisterEventHandler<EventBombPlanted>(_rankingHandler.OnBombPlantedHandler);
+        }
 
         Console.WriteLine("[ServerCoreBySeen] - loaded!");
     }

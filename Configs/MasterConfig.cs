@@ -8,15 +8,22 @@ public class MasterConfig : BasePluginConfig
     public ScoreBoardConfig Scoreboard { get; set; } = new();
     public VipConfig Vip { get; set; } = new();
     public RankingSystemConfig Ranking { get; set; } = new();
+    public PermissionsConfig Permissions { get; set; } = new();
+    public MessagesConfig Messages { get; set; } = new();
 }
 
 public class GeneralConfig
 {
-    public string ChatServerMessagesPrefix { get; set; } = "[Server Core By Seen]";
     public bool EnableVip { get; set; } = true;
     public bool EnableRanking { get; set; } = true;
     public bool EnableScoreboard { get; set; } = true;
     public string AdminMenuCommand { get; set; } = "admin";
+}
+
+public class PermissionsConfig
+{
+    public List<ulong> AdminSteamIds { get; set; } = [];
+    public List<ulong> VipSteamIds { get; set; } = [];
 }
 
 
@@ -30,7 +37,6 @@ public class ScoreBoardConfig
 
 public class VipConfig
 {
-    public List<ulong> SteamIds { get; set; } = [];
     public int ExtraExp { get; set; } = 100;
     public int ExtraMoney { get; set; } = 500;
     public int ExtraMoneyFromRound { get; set; } = 3;
@@ -48,4 +54,26 @@ public class RankingSystemConfig
     public int ExpLostPerDeath { get; set; } = 5;
     public int MaxLevel { get; set; } = 0;
     public bool ShowTopOneTag { get; set; } = true;
+}
+
+public class MessagesConfig
+{
+    public bool EnableMessages { get; set; } = true;
+
+    public string Prefix { get; set; } = "[Server Core By Seen]";
+    public string KillPlayerMessage { get; set; } =
+        "{green}You just earned {exp} XP {default}for killing a player!";
+    public string HeadshotKillMessage { get; set; } =
+        "{green}You just earned {exp} XP {default}for a headshot kill!";
+    public string DeathMessage { get; set; } =
+        "{red}You lost {exp} XP {default}for dying.";
+    public string BombPlantMessage { get; set; } =
+        "{green}You just earned {exp} XP {default}for planting the bomb!";
+    public string BombDefuseMessage { get; set; } =
+        "{green}You just earned {exp} XP {default}for defusing the bomb!";
+    public string RoundWinMessage { get; set; } =
+        "{green}You just earned {exp} XP {default}for winning the round!";
+    public string RoundLossMessage { get; set; } =
+        "{red}You lost {exp} XP {default}for losing the round.";
+
 }

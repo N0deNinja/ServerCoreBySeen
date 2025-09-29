@@ -1,5 +1,6 @@
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Entities;
 using CounterStrikeSharp.API.Modules.Utils;
 using ServerCoreBySeen.Configs;
 
@@ -14,6 +15,11 @@ public class GameHelper
 
     public static bool IsPlayerVip(ulong SteamId, MasterConfig config)
     {
-        return config.Vip.SteamIds.Contains(SteamId);
+        return config.Permissions.VipSteamIds.Contains(SteamId);
+    }
+
+    public static bool IsPlayerAdmin(ulong SteamId, MasterConfig config)
+    {
+        return config.Permissions.AdminSteamIds.Contains(SteamId);
     }
 }
