@@ -54,11 +54,17 @@ public class ChatHelper
 
     public void PrintToChat(CCSPlayerController player, string message, Dictionary<string, string>? variables = null)
     {
-        player.PrintToChat(_config.Messages.Prefix + " " + PrepareMessage(message, variables));
+        if (_config.General.EnableMessages)
+        {
+            player.PrintToChat(_config.Messages.Prefix + " " + PrepareMessage(message, variables));
+        }
     }
 
     public void PrintToAll(string message, Dictionary<string, string>? variables = null)
     {
-        Server.PrintToChatAll(_config.Messages.Prefix + " " + PrepareMessage(message, variables));
+        if (_config.General.EnableMessages)
+        {
+            Server.PrintToChatAll(_config.Messages.Prefix + " " + PrepareMessage(message, variables));
+        }
     }
 }

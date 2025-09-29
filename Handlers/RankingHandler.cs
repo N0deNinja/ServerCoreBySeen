@@ -54,20 +54,17 @@ public class RankingHandler
         var expLost = _config.Ranking.ExpLostPerDeath;
         _db.UpdatePlayerScore(victim.SteamID, -expLost, victim.PlayerName);
 
-        if (_config.Messages.EnableMessages)
+        chat.PrintToChat(killer, _config.Messages.KillPlayerMessage,
+            new() { { "exp", expGained.ToString() } });
+
+        if (@event.Headshot)
         {
-            chat.PrintToChat(killer, _config.Messages.KillPlayerMessage,
-                new() { { "exp", expGained.ToString() } });
-
-            if (@event.Headshot)
-            {
-                chat.PrintToChat(killer, _config.Messages.HeadshotKillMessage,
-                    new() { { "exp", _config.Ranking.ExpPerHeadshot.ToString() } });
-            }
-
-            chat.PrintToChat(victim, _config.Messages.DeathMessage,
-                new() { { "exp", expLost.ToString() } });
+            chat.PrintToChat(killer, _config.Messages.HeadshotKillMessage,
+                new() { { "exp", _config.Ranking.ExpPerHeadshot.ToString() } });
         }
+
+        chat.PrintToChat(victim, _config.Messages.DeathMessage,
+            new() { { "exp", expLost.ToString() } });
 
         return HookResult.Continue;
     }
@@ -81,11 +78,8 @@ public class RankingHandler
         var expGained = _config.Ranking.ExpPerBombDefuse;
         _db.UpdatePlayerScore(defuser.SteamID, expGained, defuser.PlayerName);
 
-        if (_config.Messages.EnableMessages)
-        {
-            chat.PrintToChat(defuser, _config.Messages.BombDefuseMessage,
-                new() { { "exp", expGained.ToString() } });
-        }
+        chat.PrintToChat(defuser, _config.Messages.BombDefuseMessage,
+            new() { { "exp", expGained.ToString() } });
 
         return HookResult.Continue;
     }
@@ -99,11 +93,8 @@ public class RankingHandler
         var expGained = _config.Ranking.ExpPerBombPlant;
         _db.UpdatePlayerScore(planter.SteamID, expGained, planter.PlayerName);
 
-        if (_config.Messages.EnableMessages)
-        {
-            chat.PrintToChat(planter, _config.Messages.BombPlantMessage,
-                new() { { "exp", expGained.ToString() } });
-        }
+        chat.PrintToChat(planter, _config.Messages.BombPlantMessage,
+            new() { { "exp", expGained.ToString() } });
 
         return HookResult.Continue;
     }
@@ -122,21 +113,15 @@ public class RankingHandler
         winners.ForEach((winner) =>
         {
             _db.UpdatePlayerScore(winner.SteamID, expGain, winner.PlayerName);
-            if (_config.Messages.EnableMessages)
-            {
-                chat.PrintToChat(winner, _config.Messages.RoundWinMessage,
-                    new() { { "exp", expGain.ToString() } });
-            }
+            chat.PrintToChat(winner, _config.Messages.RoundWinMessage,
+                new() { { "exp", expGain.ToString() } });
         });
 
         losers.ForEach((loser) =>
         {
             _db.UpdatePlayerScore(loser.SteamID, -expLoss, loser.PlayerName);
-            if (_config.Messages.EnableMessages)
-            {
-                chat.PrintToChat(loser, _config.Messages.RoundLossMessage,
-                    new() { { "exp", expLoss.ToString() } });
-            }
+            chat.PrintToChat(loser, _config.Messages.RoundLossMessage,
+                new() { { "exp", expLoss.ToString() } });
         });
 
         return HookResult.Continue;

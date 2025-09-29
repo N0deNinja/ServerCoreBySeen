@@ -14,6 +14,7 @@ public class MasterConfig : BasePluginConfig
 
 public class GeneralConfig
 {
+    public bool EnableMessages { get; set; } = true;
     public bool EnableVip { get; set; } = true;
     public bool EnableRanking { get; set; } = true;
     public bool EnableScoreboard { get; set; } = true;
@@ -58,8 +59,6 @@ public class RankingSystemConfig
 
 public class MessagesConfig
 {
-    public bool EnableMessages { get; set; } = true;
-
     public string Prefix { get; set; } = "[Server Core By Seen]";
     public string KillPlayerMessage { get; set; } =
         "{green}You just earned {exp} XP {default}for killing a player!";
