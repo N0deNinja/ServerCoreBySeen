@@ -13,6 +13,12 @@ public class GameHelper
         return [.. Utilities.GetPlayers().Where(p => p != null && p.IsValid && p.Team == team)];
     }
 
+    public static List<CCSPlayerController> GetAllPlayersInTeams()
+    {
+
+        return [.. Utilities.GetPlayers().Where(p => p != null && p.IsValid && (p.Team == CsTeam.CounterTerrorist || p.Team == CsTeam.Terrorist))];
+    }
+
     public static bool IsPlayerVip(ulong SteamId, MasterConfig config)
     {
         return config.Permissions.VipSteamIds.Contains(SteamId);

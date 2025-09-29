@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using CounterStrikeSharp.API.Core;
 
 namespace ServerCoreBySeen.Configs;
@@ -42,6 +43,17 @@ public class VipConfig
     public int ExtraMoney { get; set; } = 500;
     public int ExtraMoneyFromRound { get; set; } = 3;
     public bool ShowTag { get; set; } = true;
+
+
+    [JsonInclude]
+    public List<string> RoundStartItems { get; set; } = new()
+    {
+        "healthshot",
+        "weapon_flashbang",
+        "weapon_smokegrenade",
+        "fire_grenade",
+        "weapon_hegrenade"
+    };
 }
 
 public class RankingSystemConfig

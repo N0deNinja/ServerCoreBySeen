@@ -1,4 +1,5 @@
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Entities;
 using ServerCoreBySeen.Configs;
 using ServerCoreBySeen.Helpers;
 
@@ -30,6 +31,16 @@ public class PlayerHandler
             }
         }
 
+        return HookResult.Continue;
+    }
+
+    public HookResult OnRoundStartHandler(EventRoundStart @event, GameEventInfo gameInfo)
+    {
+        var allPlayers = GameHelper.GetAllPlayersInTeams();
+        allPlayers.ForEach((player) =>
+        {
+            PlayerHelper.ExecuteVipBenefits(player, _config);
+        });
         return HookResult.Continue;
     }
 }

@@ -27,6 +27,7 @@ public class ServerCorePlugin : BasePlugin, IPluginConfig<Configs.MasterConfig>
         _playerHandler = new PlayerHandler(Config);
 
         RegisterEventHandler<EventPlayerConnectFull>(_playerHandler.OnPlayerConnectFull);
+        RegisterEventHandler<EventRoundStart>(_playerHandler.OnRoundStartHandler);
 
         if (Config.General.EnableRanking)
         {
