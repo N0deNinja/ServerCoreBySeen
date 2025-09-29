@@ -56,7 +56,7 @@ public class ChatHelper
     {
         if (_config.General.EnableMessages)
         {
-            player.PrintToChat(_config.Messages.Prefix + " " + PrepareMessage(message, variables));
+            player.PrintToChat(ApplyColors(_config.Messages.Prefix) + " " + PrepareMessage(message, variables));
         }
     }
 
@@ -64,7 +64,7 @@ public class ChatHelper
     {
         if (_config.General.EnableMessages)
         {
-            Server.PrintToChatAll(_config.Messages.Prefix + " " + PrepareMessage(message, variables));
+            Server.PrintToChatAll(ApplyColors(_config.Messages.Prefix) + " " + PrepareMessage(message, variables));
         }
     }
 }

@@ -17,7 +17,7 @@ public class GeneralConfig
     public bool EnableMessages { get; set; } = true;
     public bool EnableVip { get; set; } = true;
     public bool EnableRanking { get; set; } = true;
-    public bool EnableScoreboard { get; set; } = true;
+    public bool EnableTags { get; set; } = true;
     public string AdminMenuCommand { get; set; } = "admin";
 }
 

@@ -15,6 +15,8 @@ public class ServerCorePlugin : BasePlugin, IPluginConfig<Configs.MasterConfig>
 
     private RankingDatabase _rankingDatabase = null!;
     private RankingHandler _rankingHandler = null!;
+    private PlayerHandler _playerHandler = null!;
+
 
     public override void Load(bool hotReload)
     {
@@ -22,6 +24,9 @@ public class ServerCorePlugin : BasePlugin, IPluginConfig<Configs.MasterConfig>
         _rankingDatabase.Initialize(ModuleDirectory);
 
         _rankingHandler = new RankingHandler(_rankingDatabase, Config);
+        _playerHandler = new PlayerHandler(Config);
+
+        RegisterEventHandler<EventPlayerConnectFull>(_playerHandler.OnPlayerConnectFull);
 
         if (Config.General.EnableRanking)
         {
