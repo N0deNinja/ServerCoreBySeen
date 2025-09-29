@@ -1,0 +1,38 @@
+# Build outputs
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE settings
+.vscode/
+.idea/
+*.sw?
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# SQLite database (runtime only, don't commit)
+*.db
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Auto-generated configs
+addons/counterstrikesharp/configs/plugins/ServerCoreBySeen/*.json
